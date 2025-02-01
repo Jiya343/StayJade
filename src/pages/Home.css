@@ -1,0 +1,405 @@
+/* Ensure the whole page takes full width */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    box-sizing: border-box;
+}
+
+/* Ensure the main container takes full width */
+.home-container {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Background Image - Responsive */
+.home-image {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+.about-image {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Default image height (for desktop) */
+@media (min-width: 768px) {
+    .home-image {
+        height: 90vh;  /* Larger image for desktops */
+    }
+}
+
+/* Different image height for mobile */
+@media (max-width: 767px) {
+    .home-image {
+        height: 40vh; /* Smaller image for mobile */
+        object-fit: cover;
+    }
+}
+
+/* Form Overlay - Placed on the right for desktop */
+.overlay-form {
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    background: #aa894c;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 350px;
+}
+
+/* Form for mobile (shown below the image) */
+@media (max-width: 767px) {
+    .overlay-form {
+        position: static; /* No absolute position */
+        width: 100%;
+        padding: 15px;
+    }
+}
+
+.btn-primary {
+    background-color: #64344b !important;
+    border-color: #64344b !important;
+}
+
+.btn-primary:hover {
+    background-color: #502a3d !important; /* Slightly darker shade for hover effect */
+    border-color: #502a3d !important;
+}
+
+/* Venues Section */
+.venues-section {
+    background-size: cover;
+    background-position: center;
+    padding: 80px 0;
+}
+
+.venues-section .container {
+    text-align: center;
+}
+
+.venues-section h4 {
+    color:#aa894c;
+    font-size: 2rem;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Venue Card */
+/* Venues Section */
+.venues-section {
+    background-size: cover;
+    background-position: center;
+    padding: 80px 0;
+    position: relative;
+}
+
+
+/* Venue Card */
+.venue-card {
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 3px solid #ccc;
+}
+
+.venue-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.venue-card img {
+    width: 100%;
+    height: 350px; /* Adjusted height for better visuals */
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+
+.venue-card h5 {
+    color:white;
+    font-size: 1.2rem;
+    text-align: center;
+    font-weight: bold;
+    background: transparent;
+    padding: 5px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+    .venue-card img {
+        height: 250px; /* Better sizing for mobile */
+    }
+    
+    .venues-title {
+        font-size: 1.5rem; /* Slightly smaller title on mobile */
+    }
+}
+
+/* Review Section */
+.reviews-section {
+    padding: 80px 0;
+    background-color: #f7f7f7;
+}
+
+.reviews-section h4 {
+    font-size: 2rem;
+    color:#aa894c;
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Review Card Wrapper */
+.review-wrapper {
+    text-align: center;
+}
+
+/* Review Card */
+.review-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Review Image */
+.review-img {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+}
+
+/* Review Text (Hidden until hover) */
+.review-text {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    color: #f2f0ea;
+    padding: 5px;
+    border-style: dotted;
+
+    border-radius: 8px;
+    text-align: center;
+}
+
+.review-card:hover .review-text {
+    display: block;
+}
+
+/* Reviewer Name (Placed Outside the Box) */
+.review-name {
+    margin-top: 15px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #aa894c;
+}
+
+/* Mobile Interaction */
+@media (max-width: 767px) {
+    .review-card {
+        cursor: pointer;
+    }
+
+    /* .review-img {
+        height: 250px; 
+    } */
+
+    .review-card.active .review-text {
+        display: block;
+    }
+
+    .review-name {
+        font-size: 1.1rem; /* Slightly smaller on mobile */
+    }
+}
+
+/* Footer Container */
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 60px 20px;
+    background-color: #2a2a2a; /* Dark background color */
+    color: white;
+    overflow: hidden;
+}
+
+.footer-container .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.footer-container .footer-content {
+    flex: 1;
+    max-width: 600px;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-container h4 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: #aa894c; /* Accent color for header */
+}
+
+.footer-container p {
+    font-size: 1rem;
+    margin: 10px 0;
+    line-height: 1.6;
+    color:#aa894c ;
+}
+
+.footer-container .social-media a {
+    font-size: 28px; /* Bigger icons for better accessibility */
+    margin: 10px;
+    transition: transform 0.3s ease;
+}
+
+.footer-container .social-media a:hover {
+    transform: scale(1.1); /* Scale on hover for interactivity */
+}
+
+/* Footer Image Styling */
+.footer-image-container {
+    flex: 1;
+    position: relative;
+    max-width: 100%;
+    height: 400px; /* Fixed height */
+    overflow: hidden;
+}
+
+.footer-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.footer-image-container:hover .footer-image {
+    transform: scale(1.1); /* Zoom effect on hover */
+}
+
+/* Responsive Styling for Smaller Screens */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        padding: 40px 20px;
+    }
+
+    .footer-image-container {
+        height: 300px; /* Smaller image size for mobile/tablet */
+    }
+
+    .footer-content {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    .footer-container h4 {
+        font-size: 1.6rem;
+    }
+
+    .footer-container p {
+        font-size: 0.9rem;
+    }
+}
+
+/* For extra small screens (phones) */
+@media (max-width: 480px) {
+    .footer-container h4 {
+        font-size: 1.4rem;
+    }
+
+    .footer-container p {
+        font-size: 0.8rem;
+    }
+
+    .footer-container .social-media a {
+        font-size: 24px; /* Smaller icons for very small screens */
+    }
+}
+
+
+/* Social Media Icons */
+.social-media a {
+    font-size: 24px; /* Adjust icon size */
+    margin-right: 15px; /* Space between icons */
+    color:#aa894c ;
+}
+
+
+
+/* Company Logo (Sticky Top Left) */
+.company-logo {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 9999; /* Make sure it's above other content */
+}
+
+.company-logo img {
+    width: 100px; /* Adjust size as needed */
+}
+
+/* WhatsApp Icon (Sticky Bottom Right) */
+.whatsapp-icon {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 9999; /* Ensure it's always on top */
+    background-color: #e2eae5; /* WhatsApp green background */
+    border-radius: 40%; /* Round the background */
+    padding: 10px; /* Add space around the icon */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Optional shadow for better visibility */
+}
+
+/* WhatsApp Icon Image Size */
+
+/* Adjust WhatsApp icon size on small screens */
+@media (max-width: 576px) {
+    .company-logo img {
+        width: 80px; /* Smaller size for mobile */
+    }
+}
+
+/* Adjust WhatsApp icon size on medium screens */
+@media (max-width: 768px) {
+    .company-logo img {
+        width: 95px; /* Slightly smaller on tablets */
+    }
+}

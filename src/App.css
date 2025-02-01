@@ -1,0 +1,31 @@
+/* Ensure body and html take up full width and height */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* #root div should also take full height and width */
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex; /* Ensure the root takes the whole screen */
+  flex-direction: column; /* Stack components vertically */
+}
+
+/* Prevent flex layout issues */
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure it takes full height */
+  background-color: #102434;
+}
+
+.page-container {
+  width: 100%;
+  height: 100%;
+}
