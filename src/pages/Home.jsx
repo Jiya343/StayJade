@@ -1,3 +1,6 @@
+import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Home.css";
 
@@ -28,7 +31,50 @@ const reviews = [
 ];
 
 
+
+
 const Home = () => {
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+    });
+
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(null);
+
+    // Handle input change
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    // Handle form submission
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setLoading(true);
+    
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    
+        console.log("Sending email with:", { serviceId, templateId, publicKey });
+    
+        emailjs.send(serviceId, templateId, formData, publicKey)
+            .then((response) => {
+                console.log("Email successfully sent!", response);
+                setSuccess("Message sent successfully!");
+                setFormData({ name: "", email: "", phone: "", message: "" });
+            })
+            .catch((error) => {
+                console.error("Failed to send email:", error);
+                setSuccess("Failed to send message. Please try again.");
+            })
+            .finally(() => setLoading(false));
+    };
+    
+
+
     return (
         <div className="home-container">
             <div className="row">
@@ -39,20 +85,15 @@ const Home = () => {
                     {/* Form on Right Side - Visible only on desktop */}
                     <div className="overlay-form d-none d-md-block">
                         <h4>Contact Us</h4>
-                        <form>
-                            <div className="mb-2">
-                                <input type="text" className="form-control" placeholder="Name" required />
-                            </div>
-                            <div className="mb-2">
-                                <input type="email" className="form-control" placeholder="Email" required />
-                            </div>
-                            <div className="mb-2">
-                                <input type="tel" className="form-control" placeholder="Phone" required />
-                            </div>
-                            <div className="mb-2">
-                                <textarea className="form-control" rows="4" placeholder="Message" required></textarea>
-                            </div>
-                            <button type="submit" className="btn btn-primary w-50">Submit</button>
+                        <form onSubmit={handleSubmit}>
+                            <input type="text" name="name" className="form-control mb-2" placeholder="Name" value={formData.name} onChange={handleChange} required />
+                            <input type="email" name="email" className="form-control mb-2" placeholder="Email" value={formData.email} onChange={handleChange} required />
+                            <input type="tel" name="phone" className="form-control mb-2" placeholder="Phone" value={formData.phone} onChange={handleChange} required />
+                            <textarea name="message" className="form-control mb-2" rows="4" placeholder="Message" value={formData.message} onChange={handleChange} required></textarea>
+                            <button type="submit" className="btn btn-primary w-50" disabled={loading}>
+                                {loading ? "Sending..." : "Submit"}
+                            </button>
+                            {success && <p className="mt-2 text-success">{success}</p>}
                         </form>
                     </div>
 
@@ -60,21 +101,16 @@ const Home = () => {
 
                 {/* Form Below Image - Visible only on mobile */}
                 <div className="col-12 d-md-none p-4 bg-light">
-                    <h4>Search Form</h4>
-                    <form>
-                        <div className="mb-2">
-                            <input type="text" className="form-control" placeholder="Destination" />
-                        </div>
-                        <div className="mb-2">
-                            <input type="date" className="form-control" placeholder="Check-in" />
-                        </div>
-                        <div className="mb-2">
-                            <input type="date" className="form-control" placeholder="Check-out" />
-                        </div>
-                        <div className="mb-2">
-                            <input type="number" className="form-control" placeholder="Guests" />
-                        </div>
-                        <button type="submit" className="btn btn-primary w-100">Search</button>
+                    <h4>Contact Us</h4>
+                    <form onSubmit={handleSubmit}>
+                        <input type="text" name="name" className="form-control mb-2" placeholder="Name" value={formData.name} onChange={handleChange} required />
+                        <input type="email" name="email" className="form-control mb-2" placeholder="Email" value={formData.email} onChange={handleChange} required />
+                        <input type="tel" name="phone" className="form-control mb-2" placeholder="Phone" value={formData.phone} onChange={handleChange} required />
+                        <textarea name="message" className="form-control mb-2" rows="4" placeholder="Message" value={formData.message} onChange={handleChange} required></textarea>
+                        <button type="submit" className="btn btn-primary w-50" disabled={loading}>
+                            {loading ? "Sending..." : "Submit"}
+                        </button>
+                        {success && <p className="mt-2 text-success">{success}</p>}
                     </form>
                 </div>
 
@@ -144,11 +180,14 @@ const Home = () => {
                             <p>insta@jadecaps.com</p>
                             <div className="social-media">
 
-                                <a href="https://www.youtube.com/watch?v=y-zn2dY6hj4&ab_channel=RockingSupport" target="_blank" >
+                                <a href="https://www.youtube.com/@jadecapstechnologies6780" target="_blank" >
                                     <i className="fab fa-youtube"></i>
                                 </a>
                                 <a href="https://www.instagram.com/stayjade_in/?igsh=MXZ5M3kxaHN0dDJnYQ%3D%3D#" target="_blank">
                                     <i className="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/company/jadecaps-technologies-pte-ltd" target="_blank">
+                                    <i className="fab fa-linkedin"></i>
                                 </a>
                             </div>
                         </div>
